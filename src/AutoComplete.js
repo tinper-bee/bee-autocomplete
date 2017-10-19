@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import FormControl from 'bee-form-control';
+import PropTypes from 'prop-types';
 
 const propTypes = {
     value: PropTypes.any,
