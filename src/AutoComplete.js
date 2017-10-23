@@ -154,7 +154,7 @@ class AutoComplete extends React.Component {
                 <FormControl
                     value={displayValue || value}
                     disabled={disabled }
-                    onChange={e => this.handleChange(e.target.value)}
+                    onChange={(value) => {this.handleChange(value)}}
                     onKeyDown={this.handleKeyDown}
                     placeholder={placeholder}
                     onBlur={this.handLeBlur}
