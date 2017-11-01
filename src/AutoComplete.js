@@ -9,7 +9,8 @@ const propTypes = {
 };
 const defaultProps = {
     value: "",
-    options: []
+    options: [],
+    clsPrefix: 'u-autocomplete'
 };
 
 class AutoComplete extends React.Component {
@@ -148,9 +149,9 @@ class AutoComplete extends React.Component {
     }
     render() {
         const { show, displayValue, activeItemIndex, options, value, placeholder } = this.state;
-        const {disabled } = this.props;
+        const { disabled, clsPrefix } = this.props;
         return (
-            <div className="wrapper">
+            <div className={clsPrefix}>
                 <FormControl
                     value={displayValue || value}
                     disabled={disabled }
@@ -160,7 +161,7 @@ class AutoComplete extends React.Component {
                     onBlur={this.handLeBlur}
                 />
                 {show && options.length > 0 && (
-                    <ul className="options" onMouseLeave={this.handleLeave}>
+                    <ul className={`${clsPrefix}-options`} onMouseLeave={this.handleLeave}>
                         {
                             options.map((item, index) => {
                                 return (
