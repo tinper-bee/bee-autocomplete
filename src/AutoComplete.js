@@ -33,10 +33,18 @@ class AutoComplete extends React.Component {
         this.handLeBlur = this.handLeBlur.bind(this);
     }
     componentWillReceiveProps(props) {
-        let value = props.value;
-        this.setState({
-            value: value
-        })
+        if ('value' in props) {
+            let value = props.value;
+            this.setState({
+                value: value
+            })
+        }
+        if ('options' in props) {
+            let options = props.options;
+            this.setState({
+                options: options
+            })
+        }
     }
 
     handleChange(value) {

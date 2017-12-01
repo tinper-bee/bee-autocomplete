@@ -80,7 +80,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(111);var Demo2 = __webpack_require__(112);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 根据输入框的内容，进行自动匹配列表显示", "code": "\n/**\n*\n* @title 根据输入框的内容，进行自动匹配列表显示\n* @description 用户可以按需进行选择，支持光标操作，回车事件\n*\n*/\nimport React, { Component } from 'react';\nimport AutoComplete from 'bee-autocomplete'\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: \"\",\n            options: ['10000(博宇)', '10001(波波)', '10002(李刚)'],\n            placeholder: \"查找关键字,请输入1\",\n            disabled: false\n        }\n        this.onFormChange = this.onFormChange.bind(this);\n    }\n    onFormChange(value) {\n        this.setState({\n            value: value\n        })\n\n    }\n    render() {\n        let { value, options, placeholder,disabled} = this.state;\n        return (\n            <div className=\"demo\" style={{ \"marginBottom\": \"90px\" }}>\n                <AutoComplete\n                    value={value}\n                    disabled={disabled}\n                    options={options}\n                    placeholder={placeholder}\n                    onValueChange={value => this.onFormChange(value)}\n                />\n\n            </div>\n        )\n    }\n}\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 根据输入框的内容，进行自动匹配列表显示", "code": "\n/**\n*\n* @title 根据输入框的内容，进行自动匹配列表显示\n* @description 用户可以按需进行选择，支持光标操作，回车事件\n*\n*/\nimport React, { Component } from 'react';\nimport AutoComplete from 'bee-autocomplete'\n\nclass Demo2 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: \"\",\n            options: ['a', 'aa', 'aaa', 'aaaa'],\n            placeholder: \"查找关键字,请输入a\",\n            disabled:false\n        }\n        this.onFormChange = this.onFormChange.bind(this);\n    }\n    onFormChange(value) {\n        this.setState({\n            value: value\n        })\n\n    }\n    render() {\n        let { value, options, placeholder,disabled} = this.state;\n        return (\n            <div className=\"demo\" style={{ \"marginBottom\": \"110px\" }}>\n                <AutoComplete\n                    value={value}\n                    disabled={disabled}\n                    options={options}\n                    placeholder={placeholder}\n                    onValueChange={value => this.onFormChange(value)}\n                />\n\n            </div>\n        )\n    }\n}\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }];
+	var Demo1 = __webpack_require__(111);var Demo2 = __webpack_require__(112);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 根据输入框的内容，进行自动匹配列表显示", "code": "/**\n *\n * @title 根据输入框的内容，进行自动匹配列表显示\n * @description 用户可以按需进行选择，支持光标操作，回车事件\n *\n */\nimport React, { Component } from \"react\";\nimport AutoComplete from \"../../src\";\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: \"\",\n      options: [\"10000(博宇)\", \"10001(波波)\", \"10002(李刚)\"],\n      placeholder: \"查找关键字,请输入1\",\n      disabled: false\n    };\n  }\n  onFormChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  render() {\n    let { value, options, placeholder, disabled } = this.state;\n    return (\n      <div className=\"demo\" style={{ marginBottom: \"90px\" }}>\n        <AutoComplete\n          value={value}\n          disabled={disabled}\n          options={options}\n          placeholder={placeholder}\n          onValueChange={value => this.onFormChange(value)}\n        />\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 动态改变options参数", "code": "/**\n *\n * @title 动态改变options参数\n * @description 用户可以按需进行选择，支持光标操作，回车事件\n *\n */\nimport React, { Component } from \"react\";\nimport AutoComplete from \"../../src\";\n\nclass Demo2 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: \"\",\n      options: [],\n      placeholder: \"查找关键字,请输入a\",\n      disabled: false\n    };\n  }\n  onFormChange = value => {\n    if (value !== \"a\") {\n      this.setState({\n        value: value,\n        options: [\"ab\", \"abbbbb\", \"abbbbb\", \"aaaab\"]\n      });\n    } else {\n      this.setState({\n        value: value,\n        options: [\"a\", \"aa\", \"aaa\", \"aaaa\"]\n      });\n    }\n  };\n  render() {\n    let { value, options, placeholder, disabled } = this.state;\n    return (\n      <div className=\"demo\" style={{ marginBottom: \"110px\" }}>\n        <AutoComplete\n          value={value}\n          disabled={disabled}\n          options={options}\n          placeholder={placeholder}\n          onValueChange={value => this.onFormChange(value)}\n        />\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -7876,10 +7876,18 @@
 	    }
 	
 	    AutoComplete.prototype.componentWillReceiveProps = function componentWillReceiveProps(props) {
-	        var value = props.value;
-	        this.setState({
-	            value: value
-	        });
+	        if ('value' in props) {
+	            var value = props.value;
+	            this.setState({
+	                value: value
+	            });
+	        }
+	        if ('options' in props) {
+	            var options = props.options;
+	            this.setState({
+	                options: options
+	            });
+	        }
 	    };
 	
 	    AutoComplete.prototype.handleChange = function handleChange(value) {
@@ -8093,10 +8101,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(12);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _classnames = __webpack_require__(3);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
@@ -8115,8 +8119,6 @@
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -8126,8 +8128,7 @@
 	var propTypes = {
 	  componentClass: _propTypes2["default"].oneOfType([_propTypes2["default"].element, _propTypes2["default"].string]),
 	  type: _propTypes2["default"].string,
-	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg']),
-	  id: _propTypes2["default"].string
+	  size: _propTypes2["default"].oneOf(['sm', 'md', 'lg'])
 	};
 	
 	var defaultProps = {
@@ -8145,11 +8146,14 @@
 	
 	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
-	    _this.onChange = function (e) {
+	    _this.handleChange = function (e) {
 	      var value = e.target.value;
 	      var onChange = _this.props.onChange;
 	
-	      _this.setState(_defineProperty({ value: value, showSearch: false }, 'showSearch', value == ""));
+	      _this.setState({
+	        value: value,
+	        showSearch: value == null || value === ""
+	      });
 	      if (onChange) {
 	        onChange(value);
 	      }
@@ -8161,7 +8165,7 @@
 	
 	    _this.state = {
 	      showSearch: true,
-	      value: props.value || ""
+	      value: props.value == null ? "" : props.value
 	    };
 	    _this.input = {};
 	    return _this;
@@ -8179,11 +8183,11 @@
 	    var _props = this.props,
 	        Component = _props.componentClass,
 	        type = _props.type,
-	        id = _props.id,
 	        className = _props.className,
 	        size = _props.size,
 	        clsPrefix = _props.clsPrefix,
-	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'id', 'className', 'size', 'clsPrefix']);
+	        onChange = _props.onChange,
+	        others = _objectWithoutProperties(_props, ['componentClass', 'type', 'className', 'size', 'clsPrefix', 'onChange']);
 	    // input[type="file"] 不应该有类名 .form-control.
 	
 	
@@ -8191,7 +8195,7 @@
 	    if (size) {
 	      classes['' + size] = true;
 	    }
-	    if (type == "search") {
+	    if (type === "search") {
 	      classes['u-input-search'] = true;
 	    }
 	
@@ -8200,16 +8204,18 @@
 	      classNames = (0, _classnames2["default"])(clsPrefix, classes);
 	    }
 	
-	    if (type == "search") {
+	    if (type === "search") {
 	
 	      return _react2["default"].createElement(
 	        'span',
 	        { className: 'u-input-search u-input-affix-wrapper' },
 	        _react2["default"].createElement(Component, _extends({}, others, {
 	          type: type,
-	          onChange: this.onChange,
+	          ref: function ref(el) {
+	            return _this2.input = el;
+	          },
+	          onChange: this.handleChange,
 	          value: this.state.value,
-	          id: id,
 	          className: (0, _classnames2["default"])(className, classNames)
 	        })),
 	        _react2["default"].createElement(
@@ -8223,12 +8229,11 @@
 	
 	    return _react2["default"].createElement(Component, _extends({}, others, {
 	      type: type,
-	      id: id,
 	      ref: function ref(el) {
 	        return _this2.input = el;
 	      },
 	      value: this.state.value,
-	      onChange: this.onChange,
+	      onChange: this.handleChange,
 	      className: (0, _classnames2["default"])(className, classNames)
 	    }));
 	  };
@@ -8344,10 +8349,10 @@
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(4);
@@ -8358,7 +8363,7 @@
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
@@ -8366,77 +8371,75 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-	/**
-	*
-	* @title 根据输入框的内容，进行自动匹配列表显示
-	* @description 用户可以按需进行选择，支持光标操作，回车事件
-	*
-	*/
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 根据输入框的内容，进行自动匹配列表显示
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 用户可以按需进行选择，支持光标操作，回车事件
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
 	var Demo1 = function (_Component) {
-	    _inherits(Demo1, _Component);
+	  _inherits(Demo1, _Component);
 	
-	    function Demo1(props) {
-	        _classCallCheck(this, Demo1);
+	  function Demo1(props) {
+	    _classCallCheck(this, Demo1);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
-	        _this.state = {
-	            value: "",
-	            options: ['10000(博宇)', '10001(波波)', '10002(李刚)'],
-	            placeholder: "查找关键字,请输入1",
-	            disabled: false
-	        };
-	        _this.onFormChange = _this.onFormChange.bind(_this);
-	        return _this;
-	    }
-	
-	    Demo1.prototype.onFormChange = function onFormChange(value) {
-	        this.setState({
-	            value: value
-	        });
+	    _this.onFormChange = function (value) {
+	      _this.setState({
+	        value: value
+	      });
 	    };
 	
-	    Demo1.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var _state = this.state,
-	            value = _state.value,
-	            options = _state.options,
-	            placeholder = _state.placeholder,
-	            disabled = _state.disabled;
-	
-	        return _react2['default'].createElement(
-	            'div',
-	            { className: 'demo', style: { "marginBottom": "90px" } },
-	            _react2['default'].createElement(_src2['default'], {
-	                value: value,
-	                disabled: disabled,
-	                options: options,
-	                placeholder: placeholder,
-	                onValueChange: function onValueChange(value) {
-	                    return _this2.onFormChange(value);
-	                }
-	            })
-	        );
+	    _this.state = {
+	      value: "",
+	      options: ["10000(博宇)", "10001(波波)", "10002(李刚)"],
+	      placeholder: "查找关键字,请输入1",
+	      disabled: false
 	    };
+	    return _this;
+	  }
 	
-	    return Demo1;
+	  Demo1.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var _state = this.state,
+	        value = _state.value,
+	        options = _state.options,
+	        placeholder = _state.placeholder,
+	        disabled = _state.disabled;
+	
+	    return _react2["default"].createElement(
+	      "div",
+	      { className: "demo", style: { marginBottom: "90px" } },
+	      _react2["default"].createElement(_src2["default"], {
+	        value: value,
+	        disabled: disabled,
+	        options: options,
+	        placeholder: placeholder,
+	        onValueChange: function onValueChange(value) {
+	          return _this2.onFormChange(value);
+	        }
+	      })
+	    );
+	  };
+	
+	  return Demo1;
 	}(_react.Component);
 	
-	exports['default'] = Demo1;
-	module.exports = exports['default'];
+	exports["default"] = Demo1;
+	module.exports = exports["default"];
 
 /***/ }),
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(4);
@@ -8447,7 +8450,7 @@
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
@@ -8455,68 +8458,74 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-	/**
-	*
-	* @title 根据输入框的内容，进行自动匹配列表显示
-	* @description 用户可以按需进行选择，支持光标操作，回车事件
-	*
-	*/
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 动态改变options参数
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 用户可以按需进行选择，支持光标操作，回车事件
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
 	var Demo2 = function (_Component) {
-	    _inherits(Demo2, _Component);
+	  _inherits(Demo2, _Component);
 	
-	    function Demo2(props) {
-	        _classCallCheck(this, Demo2);
+	  function Demo2(props) {
+	    _classCallCheck(this, Demo2);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
-	        _this.state = {
-	            value: "",
-	            options: ['a', 'aa', 'aaa', 'aaaa'],
-	            placeholder: "查找关键字,请输入a",
-	            disabled: false
-	        };
-	        _this.onFormChange = _this.onFormChange.bind(_this);
-	        return _this;
-	    }
-	
-	    Demo2.prototype.onFormChange = function onFormChange(value) {
-	        this.setState({
-	            value: value
+	    _this.onFormChange = function (value) {
+	      if (value !== "a") {
+	        _this.setState({
+	          value: value,
+	          options: ["ab", "abbbbb", "abbbbb", "aaaab"]
 	        });
+	      } else {
+	        _this.setState({
+	          value: value,
+	          options: ["a", "aa", "aaa", "aaaa"]
+	        });
+	      }
 	    };
 	
-	    Demo2.prototype.render = function render() {
-	        var _this2 = this;
-	
-	        var _state = this.state,
-	            value = _state.value,
-	            options = _state.options,
-	            placeholder = _state.placeholder,
-	            disabled = _state.disabled;
-	
-	        return _react2['default'].createElement(
-	            'div',
-	            { className: 'demo', style: { "marginBottom": "110px" } },
-	            _react2['default'].createElement(_src2['default'], {
-	                value: value,
-	                disabled: disabled,
-	                options: options,
-	                placeholder: placeholder,
-	                onValueChange: function onValueChange(value) {
-	                    return _this2.onFormChange(value);
-	                }
-	            })
-	        );
+	    _this.state = {
+	      value: "",
+	      options: [],
+	      placeholder: "查找关键字,请输入a",
+	      disabled: false
 	    };
+	    return _this;
+	  }
 	
-	    return Demo2;
+	  Demo2.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var _state = this.state,
+	        value = _state.value,
+	        options = _state.options,
+	        placeholder = _state.placeholder,
+	        disabled = _state.disabled;
+	
+	    return _react2["default"].createElement(
+	      "div",
+	      { className: "demo", style: { marginBottom: "110px" } },
+	      _react2["default"].createElement(_src2["default"], {
+	        value: value,
+	        disabled: disabled,
+	        options: options,
+	        placeholder: placeholder,
+	        onValueChange: function onValueChange(value) {
+	          return _this2.onFormChange(value);
+	        }
+	      })
+	    );
+	  };
+	
+	  return Demo2;
 	}(_react.Component);
 	
-	exports['default'] = Demo2;
-	module.exports = exports['default'];
+	exports["default"] = Demo2;
+	module.exports = exports["default"];
 
 /***/ })
 /******/ ]);

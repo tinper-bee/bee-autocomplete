@@ -63,10 +63,18 @@ var AutoComplete = function (_React$Component) {
     }
 
     AutoComplete.prototype.componentWillReceiveProps = function componentWillReceiveProps(props) {
-        var value = props.value;
-        this.setState({
-            value: value
-        });
+        if ('value' in props) {
+            var value = props.value;
+            this.setState({
+                value: value
+            });
+        }
+        if ('options' in props) {
+            var options = props.options;
+            this.setState({
+                options: options
+            });
+        }
     };
 
     AutoComplete.prototype.handleChange = function handleChange(value) {
