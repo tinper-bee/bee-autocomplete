@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import FormControl from 'bee-form-control';
 import PropTypes from 'prop-types';
 
@@ -159,7 +160,7 @@ class AutoComplete extends React.Component {
         const { show, displayValue, activeItemIndex, options, value, placeholder } = this.state;
         const { disabled, clsPrefix } = this.props;
         return (
-            <div className={clsPrefix}>
+            <div className={classnames(clsPrefix,this.props.className)}>
                 <FormControl
                     value={displayValue || value}
                     disabled={disabled }

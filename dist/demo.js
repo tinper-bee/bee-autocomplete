@@ -6316,6 +6316,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _beeFormControl = __webpack_require__(67);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
@@ -6519,7 +6523,7 @@
 	
 	        return _react2['default'].createElement(
 	            'div',
-	            { className: clsPrefix },
+	            { className: (0, _classnames2['default'])(clsPrefix, this.props.className) },
 	            _react2['default'].createElement(_beeFormControl2['default'], {
 	                value: displayValue || value,
 	                disabled: disabled,
@@ -6679,7 +6683,8 @@
 	        _this.handleKeyDown = function (e) {
 	            var _this$props = _this.props,
 	                onSearch = _this$props.onSearch,
-	                value = _this$props.value;
+	                value = _this$props.value,
+	                type = _this$props.type;
 	
 	            if (e.keyCode === 13 && type === "search") {
 	                if (onSearch) {
