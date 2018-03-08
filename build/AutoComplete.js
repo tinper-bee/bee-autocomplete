@@ -4,9 +4,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
 
 var _beeFormControl = require('bee-form-control');
 
@@ -19,6 +25,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -34,7 +42,11 @@ var propTypes = {
 var defaultProps = {
     value: "",
     options: [],
-    clsPrefix: 'u-autocomplete'
+    clsPrefix: 'u-autocomplete',
+    onBlur: function onBlur() {},
+    onKeyDown: function onKeyDown() {},
+    onValueChange: function onValueChange() {},
+    onChange: function onChange() {}
 };
 
 var AutoComplete = function (_React$Component) {
@@ -88,6 +100,7 @@ var AutoComplete = function (_React$Component) {
                 show: false
             });
             this.props.onValueChange(value);
+            this.props.onChange(value);
             return;
         }
 
@@ -104,10 +117,12 @@ var AutoComplete = function (_React$Component) {
             value: value
         });
         this.props.onValueChange(value);
+        this.props.onChange(value);
     };
+
     /**
      * 自动匹配的列表被选中其中某一个
-     * @param {*} value 
+     * @param {*} value
      */
 
 
@@ -117,13 +132,20 @@ var AutoComplete = function (_React$Component) {
             displayValue: ''
         });
         this.props.onValueChange(value);
+        this.props.onChange(value);
     };
 
     AutoComplete.prototype.handleKeyDown = function handleKeyDown(e) {
-        var activeItemIndex = this.state.activeItemIndex;
-        var options = this.props.options;
+        var _state = this.state,
+            displayValue = _state.displayValue,
+            activeItemIndex = _state.activeItemIndex;
+        var _props = this.props,
+            options = _props.options,
+            onValueChange = _props.onValueChange,
+            onKeyDown = _props.onKeyDown,
+            onChange = _props.onChange;
 
-
+        onKeyDown(e);
         switch (e.keyCode) {
             // 13为回车键的键码（keyCode）
             case 13:
@@ -131,6 +153,8 @@ var AutoComplete = function (_React$Component) {
                     this.setState({
                         show: false
                     });
+                    onValueChange(displayValue, activeItemIndex);
+                    onChange(displayValue, activeItemIndex);
                     break;
                 }
             // 38为上方向键，40为下方向键
@@ -146,9 +170,9 @@ var AutoComplete = function (_React$Component) {
     };
 
     AutoComplete.prototype.moveItem = function moveItem(direction) {
-        var _state = this.state,
-            activeItemIndex = _state.activeItemIndex,
-            options = _state.options;
+        var _state2 = this.state,
+            activeItemIndex = _state2.activeItemIndex,
+            options = _state2.options;
 
         var lastIndex = options.length - 1;
         var newIndex = -1;
@@ -190,52 +214,63 @@ var AutoComplete = function (_React$Component) {
     };
 
     AutoComplete.prototype.handLeBlur = function handLeBlur() {
-        this.setState({
-            show: false
-        });
+        var _this2 = this;
+
+        this.props.onBlur();
+        setTimeout(function () {
+            _this2.setState({
+                show: false
+            });
+        }, 300);
     };
 
     AutoComplete.prototype.render = function render() {
-        var _this2 = this;
+        var _this3 = this;
 
-        var _state2 = this.state,
-            show = _state2.show,
-            displayValue = _state2.displayValue,
-            activeItemIndex = _state2.activeItemIndex,
-            options = _state2.options,
-            value = _state2.value,
-            placeholder = _state2.placeholder;
-        var _props = this.props,
-            disabled = _props.disabled,
-            clsPrefix = _props.clsPrefix;
+        var _state3 = this.state,
+            show = _state3.show,
+            displayValue = _state3.displayValue,
+            activeItemIndex = _state3.activeItemIndex;
+
+        var _props2 = this.props,
+            disabled = _props2.disabled,
+            clsPrefix = _props2.clsPrefix,
+            onKeyDown = _props2.onKeyDown,
+            onBlur = _props2.onBlur,
+            onValueChange = _props2.onValueChange,
+            onChange = _props2.onChange,
+            options = _props2.options,
+            value = _props2.value,
+            placeholder = _props2.placeholder,
+            props = _objectWithoutProperties(_props2, ['disabled', 'clsPrefix', 'onKeyDown', 'onBlur', 'onValueChange', 'onChange', 'options', 'value', 'placeholder']);
 
         return _react2["default"].createElement(
             'div',
-            { className: clsPrefix },
-            _react2["default"].createElement(_beeFormControl2["default"], {
-                value: displayValue || value,
+            { className: (0, _classnames2["default"])(clsPrefix, this.props.className) },
+            _react2["default"].createElement(_beeFormControl2["default"], _extends({}, props, {
+                value: displayValue || this.state.value,
                 disabled: disabled,
                 onChange: function onChange(value) {
-                    _this2.handleChange(value);
+                    _this3.handleChange(value);
                 },
                 onKeyDown: this.handleKeyDown,
-                placeholder: placeholder,
+                placeholder: this.state.placeholder,
                 onBlur: this.handLeBlur
-            }),
-            show && options.length > 0 && _react2["default"].createElement(
+            })),
+            show && this.state.options.length > 0 && _react2["default"].createElement(
                 'ul',
                 { className: clsPrefix + '-options', onMouseLeave: this.handleLeave },
-                options.map(function (item, index) {
+                this.state.options.map(function (item, index) {
                     return _react2["default"].createElement(
                         'li',
                         {
                             key: index,
                             className: index === activeItemIndex ? "active" : '',
                             onMouseEnter: function onMouseEnter() {
-                                return _this2.handleEnter(index);
+                                return _this3.handleEnter(index);
                             },
                             onClick: function onClick() {
-                                return _this2.handleChangeList(item);
+                                return _this3.handleChangeList(item);
                             }
                         },
                         item.text || item

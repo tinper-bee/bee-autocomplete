@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(71);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 根据输入框的内容，进行自动匹配列表显示", "code": "/**\n *\n * @title 根据输入框的内容，进行自动匹配列表显示\n * @description 用户可以按需进行选择，支持光标操作，回车事件\n *\n */\nimport React, { Component } from \"react\";\nimport { AutoComplete } from 'tinper-bee';\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: \"\",\n      options: [\"10000(博宇)\", \"10001(波波)\", \"10002(李刚)\"],\n      placeholder: \"查找关键字,请输入1\",\n      disabled: false\n    };\n  }\n  onFormChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  render() {\n    let { value, options, placeholder, disabled } = this.state;\n    return (\n      <div className=\"demo\" style={{ marginBottom: \"90px\" }}>\n        <AutoComplete\n          value={value}\n          disabled={disabled}\n          options={options}\n          placeholder={placeholder}\n          onValueChange={value => this.onFormChange(value)}\n        />\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 动态改变options参数", "code": "/**\n *\n * @title 动态改变options参数\n * @description 用户可以按需进行选择，支持光标操作，回车事件\n *\n */\nimport React, { Component } from \"react\";\nimport { AutoComplete } from 'tinper-bee';\n\nclass Demo2 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: \"\",\n      options: [],\n      placeholder: \"查找关键字,请输入a\",\n      disabled: false\n    };\n  }\n  onFormChange = value => {\n    if (value !== \"a\") {\n      this.setState({\n        value: value,\n        options: [\"ab\", \"abbbbb\", \"abbbbb\", \"aaaab\"]\n      });\n    } else {\n      this.setState({\n        value: value,\n        options: [\"a\", \"aa\", \"aaa\", \"aaaa\"]\n      });\n    }\n  };\n  render() {\n    let { value, options, placeholder, disabled } = this.state;\n    return (\n      <div className=\"demo\" style={{ marginBottom: \"110px\" }}>\n        <AutoComplete\n          value={value}\n          disabled={disabled}\n          options={options}\n          placeholder={placeholder}\n          onValueChange={value => this.onFormChange(value)}\n        />\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }];
+	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(71);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 根据输入框的内容，进行自动匹配列表显示", "code": "/**\n *\n * @title 根据输入框的内容，进行自动匹配列表显示\n * @description 用户可以按需进行选择，支持光标操作，回车事件\n *\n */\nimport React, { Component } from \"react\";\nimport { AutoComplete } from 'tinper-bee';\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: \"\",\n      options: [\"10000(博宇)\", \"10001(波波)\", \"10002(李刚)\"],\n      placeholder: \"查找关键字,请输入1\",\n      disabled: false\n    };\n  }\n  onFormChange = value => {\n    console.log(value);\n    this.setState({\n      value: value\n    });\n  };\n  render() {\n    let { value, options, placeholder, disabled } = this.state;\n    return (\n      <div className=\"demo\" style={{ marginBottom: \"90px\" }}>\n        <AutoComplete\n          value={value}\n          disabled={disabled}\n          options={options}\n          placeholder={placeholder}\n          onValueChange={value => this.onFormChange(value)}\n        />\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 动态改变options参数", "code": "/**\n *\n * @title 动态改变options参数\n * @description 用户可以按需进行选择，支持光标操作，回车事件\n *\n */\nimport React, { Component } from \"react\";\nimport { AutoComplete } from 'tinper-bee';\n\nclass Demo2 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: \"\",\n      options: [],\n      placeholder: \"查找关键字,请输入a\",\n      disabled: false\n    };\n  }\n  onFormChange = value => {\n    if (value !== \"a\") {\n      this.setState({\n        value: value,\n        options: [\"ab\", \"abbbbb\", \"abbbbb\", \"aaaab\"]\n      });\n    } else {\n      this.setState({\n        value: value,\n        options: [\"a\", \"aa\", \"aaa\", \"aaaa\"]\n      });\n    }\n  };\n  render() {\n    let { value, options, placeholder, disabled } = this.state;\n    return (\n      <div className=\"demo\" style={{ marginBottom: \"110px\" }}>\n        <AutoComplete\n          value={value}\n          disabled={disabled}\n          options={options}\n          placeholder={placeholder}\n          onValueChange={value => this.onFormChange(value)}\n        />\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 用户可以按需进行选择，支持光标操作，回车事件" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -6239,6 +6239,7 @@
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
 	    _this.onFormChange = function (value) {
+	      console.log(value);
 	      _this.setState({
 	        value: value
 	      });
@@ -6312,6 +6313,8 @@
 	    value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(4);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -6332,6 +6335,8 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -6346,7 +6351,11 @@
 	var defaultProps = {
 	    value: "",
 	    options: [],
-	    clsPrefix: 'u-autocomplete'
+	    clsPrefix: 'u-autocomplete',
+	    onBlur: function onBlur() {},
+	    onKeyDown: function onKeyDown() {},
+	    onValueChange: function onValueChange() {},
+	    onChange: function onChange() {}
 	};
 	
 	var AutoComplete = function (_React$Component) {
@@ -6400,6 +6409,7 @@
 	                show: false
 	            });
 	            this.props.onValueChange(value);
+	            this.props.onChange(value);
 	            return;
 	        }
 	
@@ -6416,10 +6426,12 @@
 	            value: value
 	        });
 	        this.props.onValueChange(value);
+	        this.props.onChange(value);
 	    };
+	
 	    /**
 	     * 自动匹配的列表被选中其中某一个
-	     * @param {*} value 
+	     * @param {*} value
 	     */
 	
 	
@@ -6429,13 +6441,20 @@
 	            displayValue: ''
 	        });
 	        this.props.onValueChange(value);
+	        this.props.onChange(value);
 	    };
 	
 	    AutoComplete.prototype.handleKeyDown = function handleKeyDown(e) {
-	        var activeItemIndex = this.state.activeItemIndex;
-	        var options = this.props.options;
+	        var _state = this.state,
+	            displayValue = _state.displayValue,
+	            activeItemIndex = _state.activeItemIndex;
+	        var _props = this.props,
+	            options = _props.options,
+	            onValueChange = _props.onValueChange,
+	            onKeyDown = _props.onKeyDown,
+	            onChange = _props.onChange;
 	
-	
+	        onKeyDown(e);
 	        switch (e.keyCode) {
 	            // 13为回车键的键码（keyCode）
 	            case 13:
@@ -6443,6 +6462,8 @@
 	                    this.setState({
 	                        show: false
 	                    });
+	                    onValueChange(displayValue, activeItemIndex);
+	                    onChange(displayValue, activeItemIndex);
 	                    break;
 	                }
 	            // 38为上方向键，40为下方向键
@@ -6458,9 +6479,9 @@
 	    };
 	
 	    AutoComplete.prototype.moveItem = function moveItem(direction) {
-	        var _state = this.state,
-	            activeItemIndex = _state.activeItemIndex,
-	            options = _state.options;
+	        var _state2 = this.state,
+	            activeItemIndex = _state2.activeItemIndex,
+	            options = _state2.options;
 	
 	        var lastIndex = options.length - 1;
 	        var newIndex = -1;
@@ -6502,52 +6523,63 @@
 	    };
 	
 	    AutoComplete.prototype.handLeBlur = function handLeBlur() {
-	        this.setState({
-	            show: false
-	        });
+	        var _this2 = this;
+	
+	        this.props.onBlur();
+	        setTimeout(function () {
+	            _this2.setState({
+	                show: false
+	            });
+	        }, 300);
 	    };
 	
 	    AutoComplete.prototype.render = function render() {
-	        var _this2 = this;
+	        var _this3 = this;
 	
-	        var _state2 = this.state,
-	            show = _state2.show,
-	            displayValue = _state2.displayValue,
-	            activeItemIndex = _state2.activeItemIndex,
-	            options = _state2.options,
-	            value = _state2.value,
-	            placeholder = _state2.placeholder;
-	        var _props = this.props,
-	            disabled = _props.disabled,
-	            clsPrefix = _props.clsPrefix;
+	        var _state3 = this.state,
+	            show = _state3.show,
+	            displayValue = _state3.displayValue,
+	            activeItemIndex = _state3.activeItemIndex;
+	
+	        var _props2 = this.props,
+	            disabled = _props2.disabled,
+	            clsPrefix = _props2.clsPrefix,
+	            onKeyDown = _props2.onKeyDown,
+	            onBlur = _props2.onBlur,
+	            onValueChange = _props2.onValueChange,
+	            onChange = _props2.onChange,
+	            options = _props2.options,
+	            value = _props2.value,
+	            placeholder = _props2.placeholder,
+	            props = _objectWithoutProperties(_props2, ['disabled', 'clsPrefix', 'onKeyDown', 'onBlur', 'onValueChange', 'onChange', 'options', 'value', 'placeholder']);
 	
 	        return _react2['default'].createElement(
 	            'div',
 	            { className: (0, _classnames2['default'])(clsPrefix, this.props.className) },
-	            _react2['default'].createElement(_beeFormControl2['default'], {
-	                value: displayValue || value,
+	            _react2['default'].createElement(_beeFormControl2['default'], _extends({}, props, {
+	                value: displayValue || this.state.value,
 	                disabled: disabled,
 	                onChange: function onChange(value) {
-	                    _this2.handleChange(value);
+	                    _this3.handleChange(value);
 	                },
 	                onKeyDown: this.handleKeyDown,
-	                placeholder: placeholder,
+	                placeholder: this.state.placeholder,
 	                onBlur: this.handLeBlur
-	            }),
-	            show && options.length > 0 && _react2['default'].createElement(
+	            })),
+	            show && this.state.options.length > 0 && _react2['default'].createElement(
 	                'ul',
 	                { className: clsPrefix + '-options', onMouseLeave: this.handleLeave },
-	                options.map(function (item, index) {
+	                this.state.options.map(function (item, index) {
 	                    return _react2['default'].createElement(
 	                        'li',
 	                        {
 	                            key: index,
 	                            className: index === activeItemIndex ? "active" : '',
 	                            onMouseEnter: function onMouseEnter() {
-	                                return _this2.handleEnter(index);
+	                                return _this3.handleEnter(index);
 	                            },
 	                            onClick: function onClick() {
-	                                return _this2.handleChangeList(item);
+	                                return _this3.handleChangeList(item);
 	                            }
 	                        },
 	                        item.text || item
@@ -6683,8 +6715,7 @@
 	        _this.handleKeyDown = function (e) {
 	            var _this$props = _this.props,
 	                onSearch = _this$props.onSearch,
-	                value = _this$props.value,
-	                type = _this$props.type;
+	                value = _this$props.value;
 	
 	            if (e.keyCode === 13 && type === "search") {
 	                if (onSearch) {

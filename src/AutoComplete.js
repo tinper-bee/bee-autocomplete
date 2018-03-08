@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import FormControl from 'bee-form-control';
 import PropTypes from 'prop-types';
@@ -11,7 +11,11 @@ const propTypes = {
 const defaultProps = {
     value: "",
     options: [],
-    clsPrefix: 'u-autocomplete'
+    clsPrefix: 'u-autocomplete',
+    onBlur: () => {},
+    onKeyDown: () => {},
+    onValueChange: () => {},
+    onChange: () => {}
 };
 
 class AutoComplete extends React.Component {
@@ -33,6 +37,7 @@ class AutoComplete extends React.Component {
         this.moveItem = this.moveItem.bind(this);
         this.handLeBlur = this.handLeBlur.bind(this);
     }
+
     componentWillReceiveProps(props) {
         if ('value' in props) {
             let value = props.value;
@@ -59,6 +64,7 @@ class AutoComplete extends React.Component {
                 show: false
             })
             this.props.onValueChange(value);
+            this.props.onChange(value);
             return;
         }
 
@@ -75,10 +81,12 @@ class AutoComplete extends React.Component {
             value: value
         })
         this.props.onValueChange(value);
+        this.props.onChange(value);
     }
+
     /**
      * 自动匹配的列表被选中其中某一个
-     * @param {*} value 
+     * @param {*} value
      */
     handleChangeList(value) {
         this.setState({
@@ -86,18 +94,21 @@ class AutoComplete extends React.Component {
             displayValue: ''
         })
         this.props.onValueChange(value);
+        this.props.onChange(value);
     }
 
     handleKeyDown(e) {
-        const { activeItemIndex } = this.state;
-        const { options } = this.props;
-
+        const {displayValue, activeItemIndex} = this.state;
+        const {options, onValueChange, onKeyDown, onChange} = this.props;
+        onKeyDown(e);
         switch (e.keyCode) {
             // 13为回车键的键码（keyCode）
             case 13: {
                 this.setState({
                     show: false
-                })
+                });
+                onValueChange(displayValue, activeItemIndex);
+                onChange(displayValue, activeItemIndex);
                 break;
             }
             // 38为上方向键，40为下方向键
@@ -110,9 +121,9 @@ class AutoComplete extends React.Component {
             }
         }
     }
-    
+
     moveItem(direction) {
-        const { activeItemIndex, options } = this.state;
+        const {activeItemIndex, options} = this.state;
         const lastIndex = options.length - 1;
         let newIndex = -1;
 
@@ -145,34 +156,44 @@ class AutoComplete extends React.Component {
 
     handleEnter(index) {
         const currentItem = this.props.options[index];
-        this.setState({ activeItemIndex: index, displayValue: currentItem });
+        this.setState({activeItemIndex: index, displayValue: currentItem});
     }
 
     handleLeave() {
-        this.setState({ activeItemIndex: -1, displayValue: '' });
+        this.setState({activeItemIndex: -1, displayValue: ''});
     }
+
     handLeBlur() {
-        this.setState({
-            show: false
-        });
+        this.props.onBlur();
+        setTimeout(() => {
+            this.setState({
+                show: false
+            });
+        }, 300)
     }
+
     render() {
-        const { show, displayValue, activeItemIndex, options, value, placeholder } = this.state;
-        const { disabled, clsPrefix } = this.props;
+        const {show, displayValue, activeItemIndex} = this.state;
+        const {disabled, clsPrefix, onKeyDown, onBlur, onValueChange, onChange, options, value, placeholder,...props} = this.props;
         return (
-            <div className={classnames(clsPrefix,this.props.className)}>
+            <div className={classnames(clsPrefix, this.props.className)} >
                 <FormControl
-                    value={displayValue || value}
-                    disabled={disabled }
-                    onChange={(value) => {this.handleChange(value)}}
+                    {
+                        ...props
+                    }
+                    value={displayValue || this.state.value}
+                    disabled={disabled}
+                    onChange={(value) => {
+                        this.handleChange(value)
+                    }}
                     onKeyDown={this.handleKeyDown}
-                    placeholder={placeholder}
+                    placeholder={this.state.placeholder}
                     onBlur={this.handLeBlur}
                 />
-                {show && options.length > 0 && (
+                {show && this.state.options.length > 0 && (
                     <ul className={`${clsPrefix}-options`} onMouseLeave={this.handleLeave}>
                         {
-                            options.map((item, index) => {
+                            this.state.options.map((item, index) => {
                                 return (
                                     <li
                                         key={index}
