@@ -1,5 +1,10 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/tinper-bee/bee-auto-complete/compare/v1.0.4...v1.1.0) (2019-02-25)
+
+
+
 <a name="1.0.4"></a>
-## 1.0.4 (2018-03-08)
+## [1.0.4](https://github.com/tinper-bee/bee-auto-complete/compare/70333a7...v1.0.4) (2018-03-08)
 
 
 ### Bug Fixes
