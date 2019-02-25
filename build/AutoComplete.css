@@ -20,6 +20,8 @@
   .u-form-control:focus {
     border-color: #66afe9;
     outline: 0; }
+  .u-form-control::-ms-clear, .u-form-control ::-ms-reveal {
+    display: none; }
 
 .u-form-control[disabled] {
   background: #eee;
@@ -77,7 +79,8 @@
 
 .u-autocomplete {
   display: inline-block;
-  position: relative; }
+  position: relative;
+  font-size: 14px; }
   .u-autocomplete-options {
     margin: 0;
     padding: 0;
@@ -86,9 +89,12 @@
     left: 0;
     right: 0;
     position: absolute;
-    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.6); }
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2); }
     .u-autocomplete-options > li {
       padding: 3px 6px; }
+      .u-autocomplete-options > li:hover {
+        cursor: pointer; }
       .u-autocomplete-options > li.active {
-        background-color: #0094ff;
-        color: white; }
+        background-color: rgb(243,243,243);
+        color: rgb(30,136,229); }
