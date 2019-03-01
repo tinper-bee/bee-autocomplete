@@ -89,12 +89,15 @@
     left: 0;
     right: 0;
     position: absolute;
-    border-radius: 4px;
+    border-radius: 3px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2); }
     .u-autocomplete-options > li {
       padding: 3px 6px; }
       .u-autocomplete-options > li:hover {
         cursor: pointer; }
       .u-autocomplete-options > li.active {
-        background-color: rgb(243,243,243);
-        color: rgb(30,136,229); }
+        background-color: rgb(235, 236, 240);
+        color: rgb(245, 60, 50); }
+  .u-autocomplete .u-form-control {
+    height: 32px;
+    border-color: rgb(165, 173, 186); }

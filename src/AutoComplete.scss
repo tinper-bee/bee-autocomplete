@@ -14,7 +14,7 @@
     left: 0;
     right: 0;
     position: absolute;
-    border-radius: $select-border-radius;
+    border-radius: $border-radius-base;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 
     > li {
@@ -27,6 +27,10 @@
         color: $brand-primary;
       }
     }
+  }
+  .u-form-control{
+    height: 32px;
+    border-color: $border-color-base;
   }
 }
 
