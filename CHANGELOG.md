@@ -1,3 +1,8 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/tinper-bee/bee-auto-complete/compare/v1.1.1...v1.1.2) (2019-03-05)
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/tinper-bee/bee-auto-complete/compare/v1.1.0...v1.1.1) (2019-03-01)
 
