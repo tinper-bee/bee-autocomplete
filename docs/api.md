@@ -28,10 +28,10 @@ import 'bee-autocomplete/build/AutoComplete.css';
 |placeholder|输入框的默认提示|string|-|
 |show|控制自动匹配列表的展开和隐藏|boolean|false|
 |disabled|是否禁用输入框|boolean|false|
-|onChange| 输入框值更改时触发的回调函数 |function|-|
+|onChange| 输入框值更改时触发的回调函数，参数为 value 值 |function|-|
 |onValueChange| 输入框值更改时触发的回调函数 |function|-|
 |onKeyDown| 监听input的键盘事件，调用此函数|handleKeyDown()|-|
-|onBlur| input 的失去焦点时，调用此函数|function|-|
+|onBlur| input 的失去焦点时，调用此函数，参数为 value 值|function|-|
 |onSelectOption| 被选中时调用，参数为选中项的 value 值|function|-|
 
 ## 注意事项
